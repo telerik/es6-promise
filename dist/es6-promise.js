@@ -1139,7 +1139,7 @@ function polyfill() {
             // silently ignored
         }
 
-        if (promiseToString === '[object Promise]' && !P.cast) {
+        if (promiseToString === '[object Object]' && !P.cast) {
             return;
         }
     }

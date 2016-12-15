@@ -1132,14 +1132,16 @@ function polyfill() {
     var P = local.Promise;
 
     if (P) {
-        var promiseToString = null;
+        var promiseToString = null,
+            promiseInstance = null;
         try {
-            promiseToString = Object.prototype.toString.call(P.resolve());
+            promiseInstance = P.resolve();
+            promiseToString = Object.prototype.toString.call(promiseInstance);
         } catch (e) {
             // silently ignored
         }
 
-        if (promiseToString === '[object Object]' && !P.cast) {
+        if (!P.cast && (promiseToString === '[object Promise]' || (typeof promiseInstance === 'object'))) {
             return;
         }
     }
